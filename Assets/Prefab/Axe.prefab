@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5232593669886361729}
   - component: {fileID: 8140527746430509048}
   - component: {fileID: 43791445501479869}
+  - component: {fileID: 1345138018482287210}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1345138018482287210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390345576642323971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4904a6faffac5104b95b1dcaee8c796a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Head: {fileID: 0}
 --- !u!1 &2350128699558234113
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +111,6 @@ GameObject:
   - component: {fileID: 8550646909558076572}
   - component: {fileID: 7499594987519590281}
   - component: {fileID: 646596846237013949}
-  - component: {fileID: 69210373194788320}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -318,19 +331,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1128777, y: 0.017011669, z: 0.29119164}
   m_Center: {x: 0.021641282, y: 0.00009442307, z: 0.074229516}
---- !u!114 &69210373194788320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2350128699558234113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4904a6faffac5104b95b1dcaee8c796a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Head: {fileID: 390345576642323971}
 --- !u!1 &5054169694962199171
 GameObject:
   m_ObjectHideFlags: 0

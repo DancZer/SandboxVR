@@ -6,37 +6,16 @@ using EzySlice;
 
 public class Axe : MonoBehaviour
 {
-    public GameObject Head = null;
-     private XRGrabInteractable interactable = null; 
+    private void OnTriggerEnter(Collider other) {
+        Debug.Log($"OnTriggerEnter {other.gameObject.name}!");
 
-    private bool IsCutDone = false;
-    private void Awake() {
-        interactable = GetComponent<XRGrabInteractable>();   
-    }
+        var shatterer = other.gameObject.GetComponent<TreeCutChunk>();
 
-    private void OnEnable() {
-        interactable.activated.AddListener(ResetCut);
-    }
-
-    private void OnDisable() {
-        interactable.activated.RemoveListener(ResetCut);
-    }
-
-    private void ResetCut(ActivateEventArgs eventArgs){
-        IsCutDone = false;
-    }
-
-    private void Update() {
-        
-    }
-
-     void OnCollisionEnter(Collision collision)
-    {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 2);
+        if(shatterer != null){
+            shatterer.CutChunk();
+            Debug.Log($"CutChunk {shatterer.gameObject.name}!");
+        }else{
+            Debug.Log($"TreeCutChunk not for {other.gameObject.name} found!");
         }
-
-        if(IsCutDone) return;
     }
 }

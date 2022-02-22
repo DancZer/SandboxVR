@@ -36,12 +36,9 @@ public class Sword : MonoBehaviour
         DrawPlane(Head.transform.position, Head.transform.up, 0); //TODO get plane normal normal
     }
 
-     void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 2);
-        }
+        Debug.Log($"OnCollisionEnter {collision.gameObject.name}!");
 
         if(!ReadyToCut || IsCutDone) return;
 
