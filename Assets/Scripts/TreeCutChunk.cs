@@ -6,6 +6,8 @@ public class TreeCutChunk : MonoBehaviour
 {   
     private bool _isActive = false;
 
+    public float Health = 3000;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,18 @@ public class TreeCutChunk : MonoBehaviour
         _isActive = true;
     }
 
-    public void CutChunk(){
-        if(!_isActive) return;
-        
-        Debug.Log($"CutChunk {this.gameObject.name}!");
-        this.gameObject.SetActive(false);
-        GetComponentInParent<TreeCutAreaLogic>().CutNext();
+    public float CutChunk(float damage){
+        if(!_isActive) return -1;
+
+        Health-=damage;
+
+        if(Health<=0){
+            Health = 0;
+            Debug.Log($"CutChunk {this.gameObject.name}!");
+            this.gameObject.SetActive(false);
+            GetComponentInParent<TreeCutAreaLogic>().CutNext();
+        }
+
+        return Health;
     }
 }
