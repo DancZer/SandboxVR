@@ -18,9 +18,11 @@ public class Axe : MonoBehaviour
     public Text Label2;
     public float ChopMomentumThreshold = 1500;
 
+    public Collider HeadCollider;
+
     private void Awake() {
         _audioSource = GetComponent<AudioSource>();
-        _rigidbody = GetComponentInParent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update() {
@@ -30,27 +32,37 @@ public class Axe : MonoBehaviour
         var velocity = _rigidbody.velocity.magnitude;
         var momentum = velocity * _rigidbody.mass;
 
-        Debug.Log($"Axe Momentum:{momentum}");
-
         SwingMomentum.Enqueue(momentum);
     }
 
-    private void OnTriggerEnter(Collider other) {        
-        Debug.Log($"OnTriggerEnter {other.gameObject.name}!");
+    private void OnCollisionEnter(Collision collision) {        
+        
+        Debug.Log($"Axe OnCollisionEnter {collision.gameObject.name} {HeadCollider.name} {collision.contacts[0].thisCollider.name} {collision.contacts[0].otherCollider.name}!");
+
+        if(HeadCollider != null && collision.contacts[0].thisCollider != HeadCollider){
+            return;
+        }
+
+        Debug.Log($"Axe OnCollisionEnter with Head {collision.gameObject.name}!");
 
         var damage = GetChopDamage();
         if(ChopMomentumThreshold < damage) {
-            var shatterer = other.gameObject.GetComponent<TreeCutChunk>();
+            var shatterer = collision.gameObject.GetComponent<TreeCutChunk>();
 
             if(shatterer != null){
                 float remainedHealth = shatterer.CutChunk(damage);
                 if(remainedHealth>=0){
-                    Label2.text = $"Chunk Remaining Health: {remainedHealth:00.##}";
+                    Label2.text = $"Axe Chunk Remaining Health: {remainedHealth:00.##}";
+
+                    var hingeJoint = GetComponent<HingeJoint>();
+                    if(hingeJoint != null){
+                        Destroy(hingeJoint);
+                    }
                 }
                 
-                Debug.Log($"CutChunk {shatterer.gameObject.name}!");
+                Debug.Log($"Axe CutChunk {shatterer.gameObject.name}!");
             }else{
-                Debug.Log($"TreeCutChunk not for {other.gameObject.name} found!");
+                Debug.Log($"Axe TreeCutChunk not for {collision.gameObject.name} found!");
             }
 
             PlayRandomChopAudio();

@@ -38,7 +38,7 @@ public class Sword : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"OnCollisionEnter {collision.gameObject.name}!");
+        Debug.Log($"Sword OnCollisionEnter {collision.gameObject.name}!");
 
         if(!ReadyToCut || IsCutDone) return;
 
@@ -46,11 +46,11 @@ public class Sword : MonoBehaviour
 
         if(shatterer != null){
             shatterer.CutByPlane(Head.transform.position, Head.transform.up);
-            Debug.Log($"CutByPlane {collision.gameObject.name}!");
+            Debug.Log($"Sword CutByPlane {collision.gameObject.name}!");
             DrawPlane(Head.transform.position, Head.transform.up);
             IsCutDone = true;
         }else{
-            Debug.Log($"RuntimeShatterExample not for {collision.gameObject.name} found!");
+            Debug.Log($"Sword RuntimeShatterExample not for {collision.gameObject.name} found!");
         }
     }
 
