@@ -62,7 +62,7 @@ public class Axe : MonoBehaviour
                 
                 Debug.Log($"Axe CutChunk {shatterer.gameObject.name}!");
             }else{
-                Debug.Log($"Axe TreeCutChunk not for {collision.gameObject.name} found!");
+                Debug.Log($"Axe TreeCutChunk not for found on {collision.gameObject.name}!");
             }
 
             PlayRandomChopAudio();
